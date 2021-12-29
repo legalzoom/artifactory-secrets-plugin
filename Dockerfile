@@ -10,7 +10,7 @@ RUN go mod download
 COPY cmd/ cmd/
 COPY *.go .
 
-RUN CGO_ENABLED=0 GOARCH=$TARGETARCH go build -o vault/plugins/artifactory cmd/artifactory/main.go
+RUN CGO_ENABLED=0 GOARCH=arm64 go build -o vault/plugins/artifactory cmd/artifactory/main.go
 
 FROM alpine
 COPY --from=builder /workspace/vault/plugins/artifactory /vault-plugin 
