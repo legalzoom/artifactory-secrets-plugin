@@ -21,7 +21,10 @@ func main() {
 		os.Exit(1)
 	}
 
+
 	tlsConfig := apiClientMeta.GetTLSConfig()
+	logger.Info("tls ca is %v", tlsConfig.CAPath)
+	logger.Info("tls ca is %v", os.Args[1:])
 	tlsProviderFunc := api.VaultPluginTLSProvider(tlsConfig)
 
 	err := plugin.Serve(&plugin.ServeOpts{
