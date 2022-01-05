@@ -2,6 +2,7 @@ package artifactory
 
 import (
 	"context"
+	"encoding/base64"
 	"time"
 
 	"github.com/hashicorp/vault/sdk/framework"
@@ -102,6 +103,7 @@ func (b *backend) pathTokenCreatePerform(ctx context.Context, req *logical.Reque
 
 	response := b.Secret(SecretArtifactoryAccessTokenType).Response(map[string]interface{}{
 		"access_token": resp.AccessToken,
+		"npm_token":    base64.StdEncoding.EncodeToString([]byte(resp.AccessToken)),
 		"role":         roleName,
 		"scope":        resp.Scope,
 		"token_id":     resp.TokenId,
